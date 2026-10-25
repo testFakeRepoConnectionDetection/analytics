@@ -1,5 +1,7 @@
 # Analytics (fixture)
 
+Business function: `MIDDLE_OFFICE` (`app.business_function`).
+
 Risk analytics. Bidirectional with Trading/Pricing, fed by Booking positions, and a client of DataHub.
 
 ## Integrations (topology)

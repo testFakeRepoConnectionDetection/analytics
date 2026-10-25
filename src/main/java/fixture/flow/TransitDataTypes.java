@@ -6,6 +6,9 @@ package fixture.flow;
  */
 public final class TransitDataTypes {
 
+  /** Node attribute business_function for Analytics. */
+  public static final String BUSINESS_FUNCTION = "MIDDLE_OFFICE";
+
   public static final String API_PRICED_TRADE = "PRICED_TRADE";
   public static final String HTTP_RISK_RESULT = "RISK_RESULT";
   public static final String KAFKA_POSITION_SNAPSHOT = "POSITION_SNAPSHOT";
