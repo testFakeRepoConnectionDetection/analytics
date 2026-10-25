@@ -3,12 +3,26 @@ app:
   flow-enrichment:
     data-category-field: data_category
   integrations:
+    trading-pricing:
+      base-url: https://trading-pricing.internal/api/v1/risk-results
+      target-application: Trading/Pricing
+      data-category: RISK_RESULT
+      payload-format: JSON
+      payload-type: fixture.dto.RiskResultDto
     datahub:
       base-url: https://datahub.internal/api/v1/risk-market-data
       target-application: DataHub
       data-category: RISK_MARKET_DATA
       payload-format: JSON
       payload-type: fixture.dto.RiskMarketDataRequestDto
+  api:
+    priced-trades:
+      path: /api/v1/priced-trades
+      data-category: PRICED_TRADE
+      called-by-application: Trading/Pricing
+  callers:
+    - Trading/Pricing
+    - Booking
 
 spring:
   kafka:
