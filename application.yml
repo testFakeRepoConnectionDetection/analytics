@@ -1,0 +1,21 @@
+app:
+  name: Analytics
+  flow-enrichment:
+    data-category-field: data_category
+  integrations:
+    datahub:
+      base-url: https://datahub.internal/api/v1/risk-market-data
+      target-application: DataHub
+      data-category: RISK_MARKET_DATA
+      payload-format: JSON
+      payload-type: fixture.dto.RiskMarketDataRequestDto
+
+spring:
+  kafka:
+    consumer:
+      group-id: analytics-risk
+      topic: positions.snapshot
+      produced-by-application: Booking
+      message:
+        data-category: POSITION_SNAPSHOT
+        payload-format: AVRO
