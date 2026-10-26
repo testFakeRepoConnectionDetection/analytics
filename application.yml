@@ -1,6 +1,7 @@
 app:
   name: Analytics
   business_function: MIDDLE_OFFICE
+  pillar: "Trading & Analytics"
   flow-enrichment:
     data-category-field: data_category
   integrations:
