@@ -3,35 +3,29 @@ app:
   business_function: MIDDLE_OFFICE
   pillar: "Trading & Analytics"
   flow-enrichment:
-    data-category-field: data_category
+    data-field: data
+    frequency-field: frequency
   integrations:
     trading-pricing:
-      base-url: https://trading-pricing.internal/api/v1/risk-results
+      base-url: https://trading-pricing.internal/api/v1/prices
       target-application: Trading/Pricing
-      data-category: RISK_RESULT
-      payload-format: JSON
-      payload-type: fixture.dto.RiskResultDto
+      connection-kind: API
+      channel: /api/v1/prices
+      data: price
+      frequency: real-time
     datahub:
-      base-url: https://datahub.internal/api/v1/risk-market-data
+      base-url: https://datahub.internal/api/v1/realtime-pv
       target-application: DataHub
-      data-category: RISK_MARKET_DATA
-      payload-format: JSON
-      payload-type: fixture.dto.RiskMarketDataRequestDto
+      connection-kind: API
+      channel: /api/v1/realtime-pv
+      data: PV
+      frequency: real-time
   api:
-    priced-trades:
-      path: /api/v1/priced-trades
-      data-category: PRICED_TRADE
+    trades:
+      path: /api/v1/trades
       called-by-application: Trading/Pricing
+      connection-kind: API
+      data: trade
+      frequency: real-time
   callers:
     - Trading/Pricing
-    - Booking
-
-spring:
-  kafka:
-    consumer:
-      group-id: analytics-risk
-      topic: positions.snapshot
-      produced-by-application: Booking
-      message:
-        data-category: POSITION_SNAPSHOT
-        payload-format: AVRO

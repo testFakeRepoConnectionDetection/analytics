@@ -3,22 +3,20 @@
 Business function: `MIDDLE_OFFICE` (`app.business_function`).
 Pillar: `Trading & Analytics` (`app.pillar`).
 
-Risk analytics. Bidirectional with Trading/Pricing, fed by Booking positions, and a client of DataHub.
+Risk analytics.
 
 ## Integrations (topology)
 
-- Exposes `/api/v1/priced-trades` called by **Trading/Pricing**.
-- Sends the risk result back to **Trading/Pricing** on `/api/v1/risk-results`.
-- Consumes Kafka topic `positions.snapshot` produced by **Booking**.
-- Calls **DataHub** over HTTP for risk market data (`/api/v1/risk-market-data`).
+- Sends the price to **Trading/Pricing** on `/api/v1/prices`.
+- Receives the trade from **Trading/Pricing** on `/api/v1/trades`.
+- Sends PV to **DataHub** on `/api/v1/realtime-pv`.
 
 ## Data transiting on flows (Data Model fixture)
 
-| Peer | Kind | direction | Channel | data_category |
-|------|------|-----------|---------|---------------|
-| Trading/Pricing | API | inbound | /priced-trades | `PRICED_TRADE` |
-| Trading/Pricing | API | outbound | /risk-results | `RISK_RESULT` |
-| Booking | KAFKA | inbound | positions.snapshot | `POSITION_SNAPSHOT` |
-| DataHub | API | outbound | /risk-market-data | `RISK_MARKET_DATA` |
+| Peer | direction | Kind | Channel | data | frequency |
+|------|-----------|------|---------|------|-----------|
+| Trading/Pricing | outbound | API | /api/v1/prices | `price` | `real-time` |
+| Trading/Pricing | inbound | API | /api/v1/trades | `trade` | `real-time` |
+| DataHub | outbound | API | /api/v1/realtime-pv | `PV` | `real-time` |
 
-Constants: `fixture.flow.TransitDataTypes`. DTOs: `RiskResultDto`, `RiskMarketDataRequestDto`.
+See `TransitDataTypes.java` and `application.yml` (`data`, `frequency`).
