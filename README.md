@@ -1,5 +1,7 @@
 # Analytics (fixture)
 
+Implemented in Python.
+
 Business function: `MIDDLE_OFFICE` (`app.business_function`).
 Pillar: `Trading & Analytics` (`app.pillar`).
 
@@ -19,4 +21,4 @@ Risk analytics.
 | Trading/Pricing | inbound | API | /api/v1/trades | `trade` | `real-time` |
 | DataHub | outbound | API | /api/v1/realtime-pv | `PV` | `real-time` |
 
-See `TransitDataTypes.java` and `application.yml` (`data`, `frequency`).
+See `src/analytics/flows.py` and `application.yml` (`data`, `frequency`).
